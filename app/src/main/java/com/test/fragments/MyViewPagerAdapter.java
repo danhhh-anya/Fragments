@@ -21,15 +21,10 @@ public class MyViewPagerAdapter extends FragmentPagerAdapter {
         this.fragments = fragments;
     }
 
-    @NonNull
-    @Override
-    public Fragment getItem(int position) {
-        return fragments.get(position);
-    }
-
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
+
         return fragments.get(position).getTitle();
     }
 
@@ -38,4 +33,9 @@ public class MyViewPagerAdapter extends FragmentPagerAdapter {
         return fragments.size();
     }
 
+    @NonNull
+    @Override
+    public Fragment getItem(int position) {
+        return fragments.get(position);
+    }
 }

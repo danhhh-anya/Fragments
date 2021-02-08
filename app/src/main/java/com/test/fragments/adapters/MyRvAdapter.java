@@ -15,9 +15,9 @@ import java.util.List;
 public class MyRvAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<RecipeModel> recipeModels;
-    private MyRvAdapter.OnItemClick listener;
+    private OnItemClick listener;
 
-    public MyRvAdapter(List<RecipeModel> recipeModels) {
+    public MyRvAdapter(List<RecipeModel> recipeModels, OnItemClick listener) {
         this.recipeModels = recipeModels;
         this.listener = listener;
     }

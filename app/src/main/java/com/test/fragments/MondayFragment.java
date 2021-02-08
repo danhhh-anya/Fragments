@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.test.fragments.adapters.MyRvAdapter;
@@ -20,12 +21,16 @@ import com.test.fragments.models.RecipeModel;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MondayFragment extends BaseFragment {
     private RecyclerView rvList;
     private MyRvAdapter adapter;
     private Button Undo;
     private Button Add;
     private ArrayList<RecipeModel> list;
+
+    private EditText setTitle;
+    private EditText setDescription;
 
     private final MyRvAdapter.OnItemClick listener = this::Delete;
 
@@ -40,11 +45,16 @@ public class MondayFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       Undo = view.findViewById(R.id.btnUndo);
-       Add = view.findViewById(R.id.btnAdd);
+
+        setTitle = view.findViewById(R.id.Title);
+        setDescription = view.findViewById(R.id.Description);
+
+        Undo = view.findViewById(R.id.btnUndo);
+        Add = view.findViewById(R.id.btnAdd);
+
 
         list = (ArrayList<RecipeModel>) generateRecipes();
-        adapter = new MyRvAdapter(list);
+        adapter = new MyRvAdapter(list, listener);
         adapter.notifyDataSetChanged();
 
         rvList = view.findViewById(R.id.rvList);
@@ -65,7 +75,7 @@ public class MondayFragment extends BaseFragment {
     }
     private void Add(){
         adapter.notifyItemInserted(0);
-        list.add(0, new RecipeModel("Title ", "Description"));
+        list.add(0, new RecipeModel(" " + setTitle.getText().toString() ," " + setDescription.getText().toString()));
     }
     private List<RecipeModel> generateRecipes(){
         ArrayList<RecipeModel> tmp = new ArrayList<>();
